@@ -4,7 +4,7 @@
  * @brief Checks two floats to see if they are almost equal
  */
 bool feq(float a, float b, float e = std::numeric_limits<float>::epsilon()) {
-	return std::fabs(a-b) <= e;
+	return fabs(a-b) <= e;
 }
 
 vec3 vec3::AddVec3(const vec3 a, const vec3 b) const {

@@ -10,6 +10,8 @@
 
 //to integrate these we use Euler's method. To do this we start with an initial condition and update it:
 
+int is_collide(float h);
+
 int main(){
 
 

@@ -1,12 +1,12 @@
 CPP=c++
 BUILDDIR ?= build
-INCDIR ?= .
+INCDIR ?= inc
 HEADERS=Containers.hpp Shapes.hpp vec.hpp
 CXXFLAGS=-I$(INCDIR)
 SRCS := vec.cpp Shapes.cpp
 OBJS := $(addprefix $(BUILDDIR)/, $(SRCS:.cpp=.o))
-TARGETS := containers_demo
-TARGET_SRC := containers_demo.cpp
+TARGETS := containers_demo Numerical_integration_with_collision
+TARGET_SRC := containers_demo.cpp Numerical_interation_with_collision.cpp
 DIR_TEST := test
 TESTFLAGS=-lboost_unit_test_framework --coverage
 SRC_TEST = $(wildcard $(DIR_TEST)/*.cpp)
@@ -27,7 +27,7 @@ $(BUILDDIR)/%_test: $(BUILDDIR)/%_test.o $(OBJS) $(BUILDDIR)
 $(BUILDDIR)/%_test.o: $(DIR_TEST)/%_test.cpp
 	$(CPP) $(CXXFLAGS) -c -o $@ $< $(TESTFLAGS)
 
-$(BUILDDIR)/%.o: %.cpp
+$(BUILDDIR)/%.o: src/%.cpp
 	$(CPP) $(CXXFLAGS) -c -o $@ $< $(TESTFLAGS)
 
 %.gcda: $(BUILDDIR)/%
@@ -40,12 +40,12 @@ $(BUILDDIR)/%.gcda: $(BUILDDIR)/%
 
 .PHONY: test
 test: $(BUILDDIR) $(EXEC_TEST)
-	./runTests.sh
+	./test/runTests.sh
 
 .PHONY: coverage
 #coverage: $(ALLOBJS:.o=.gcda)
 coverage:
-	./runTests.sh
+	./test/runTests.sh
 	./build/containers_demo
 	lcov --capture --directory $(BUILDDIR) -b . --output-file $(BUILDDIR)/coverage.info
 	lcov --remove $(BUILDDIR)/coverage.info -o $(BUILDDIR)/stripped_coverage.info "/usr/include/*"
