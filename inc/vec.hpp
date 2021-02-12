@@ -11,9 +11,9 @@
 */
 class vec3 {
 	private:
+	float x, y, z;
 
 	public:
-	float x, y, z;
 	vec3() : x(0), y(0), z(0) {}
 	vec3(float in_x, float in_y, float in_z) : x(in_x), y(in_y), z(in_z) {}
 	vec3(const vec3 &in) : x(in.x), y(in.y), z(in.z) {}
@@ -34,12 +34,13 @@ class vec3 {
 	float dot_product(const vec3& b) const;
 	vec3 cross_product(const vec3& b) const;
 	vec3 operator *(float rhs) const;
+	vec3 operator /(float rhs) const;
 	friend const vec3 operator*( float lhs, const vec3& rhs);
 	friend std::ostream & operator<<(std::ostream &out, const vec3& rhs);
 };
 
 const vec3 operator*( float lhs, const vec3& rhs);
-bool feq(float a, float b, float e);
+bool feq(float a, float b, float e = std::numeric_limits<float>::epsilon());
 
 struct vec4 {
     struct vec3;

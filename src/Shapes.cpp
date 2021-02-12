@@ -1,15 +1,14 @@
 #include "Shapes.hpp"
 
 bool Triangle::contains(const vec3& in) const {
-	return false;
+  vec3 a = points.at(0);
+  vec3 b = points.at(1);
+  vec3 c = points.at(2);
+	return feq( ((b-a).cross_product(c-a)).dot_product(in-a) , 0 );
 }
 
 vec3 Triangle::findCenter() const {
-	float ox = points.at(0).x + points.at(1).x + points.at(2).x;
-	float oy = points.at(0).y + points.at(1).y + points.at(2).y;
-	float oz = points.at(0).z + points.at(1).z + points.at(2).z;
-
-	return {ox/3, oy/3, oz/3};
+  return (points.at(0)+points.at(1)+points.at(2))/3;
 }
 
 bool Box::operator==(const Box& rhs) const {
@@ -18,6 +17,19 @@ bool Box::operator==(const Box& rhs) const {
 
 std::ostream& operator<<(std::ostream &out, const Box& rhs) {
 	out << rhs.center << " " << rhs.points[0] << " " << rhs.points[1] ;
+	return out;
+}
+
+std::ostream& operator<<(std::ostream &out, const Sphere& rhs) {
+	out << rhs.center << " " << rhs.radius ;
+	return out;
+}
+
+std::ostream& operator<<(std::ostream &out, const Triangle& rhs) {
+  out << "(";
+  for (auto p: rhs.points)
+	  out << p << ", ";
+  out << ")";
 	return out;
 }
 
@@ -74,7 +86,7 @@ Sphere Box::getBoundingSphere() const {
 }
 
 bool Sphere::operator== (const Sphere& rhs) const {
-	return center == rhs.center && radius == rhs.radius;
+	return center == rhs.center && feq(radius , rhs.radius);
 }
 
 bool Sphere::contains(const vec3& in) const {

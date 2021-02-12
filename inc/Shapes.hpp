@@ -17,6 +17,8 @@ class Triangle : public Collider {
 	public:
 		std::vector<vec3> points = {};
 
+		friend std::ostream& operator<<(std::ostream &out, const Triangle& rhs);
+
     bool contains(const vec3& in) const;
 		vec3 findCenter() const;
 		Box getBoundingBox() const;
@@ -49,6 +51,7 @@ class Sphere : public Collider {
     public:
 				Sphere(const vec3& c, float r) : radius{r}, center{c} {}
 				bool operator== (const Sphere& rhs) const;
+		    friend std::ostream& operator<<(std::ostream &out, const Sphere& rhs);
 
         bool contains(const vec3& in) const;
 				vec3 findCenter() const;

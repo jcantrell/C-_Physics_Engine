@@ -2,7 +2,7 @@ CPP=c++
 BUILDDIR ?= build
 INCDIR ?= inc
 HEADERS=Containers.hpp Shapes.hpp vec.hpp
-CXXFLAGS=-I$(INCDIR)
+CXXFLAGS=-I$(INCDIR) -std=c++11
 SRCS := vec.cpp Shapes.cpp
 OBJS := $(addprefix $(BUILDDIR)/, $(SRCS:.cpp=.o))
 TARGETS := containers_demo Numerical_integration_with_collision

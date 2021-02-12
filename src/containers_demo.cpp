@@ -4,6 +4,8 @@
 #include <vector>
 #include <typeinfo>
 
+#include "Shapes.hpp"
+
 int main() {
 
 	PhysEnv env1(0.01, 0.0) ;
@@ -27,9 +29,13 @@ int main() {
 	while (env1.time < maxTime) {
 		env1.update();
 		std::cout << env1.time << "\n";
-		std::cout << (env1.ObjectList[0]).CoM.z << "\n";
+		std::cout << (env1.ObjectList[0]).CoM << "\n";
 	}
 
+	Triangle a;
+	a.points.push_back(vec3(1,1,1));
+	a.points.push_back(vec3(5,1,1));
+	a.points.push_back(vec3(3,4,4));
 	std::cout << "Success" << "\n";
 
 }

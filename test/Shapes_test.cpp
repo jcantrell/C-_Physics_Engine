@@ -14,11 +14,10 @@ BOOST_AUTO_TEST_CASE(Triangle_findCenter) {
 
 BOOST_AUTO_TEST_CASE(Triangle_contains) {
 	Triangle a;
-	a.points.push_back(vec3(1,1,1));
-	a.points.push_back(vec3(5,1,1));
-	a.points.push_back(vec3(3,4,4));
-	//BOOST_CHECK(a.contains(vec3(2,2,2)));
-	BOOST_TEST_MESSAGE( "Fix Triangle::contains method" );
+	a.points.push_back(vec3(2,0,0));
+	a.points.push_back(vec3(0,0,0));
+	a.points.push_back(vec3(0,2,0));
+	BOOST_REQUIRE(a.contains(vec3(1,1,0)));
 }
 
 BOOST_AUTO_TEST_CASE(Triangle_getBoundingBox) {
@@ -28,7 +27,7 @@ BOOST_AUTO_TEST_CASE(Triangle_getBoundingBox) {
 	a.points.push_back(vec3(3,4,4));
   Box b(vec3(3,2.5,2.5),vec3(-2,-1.5,-1.5),vec3(2,1.5,1.5));
 
-  BOOST_CHECK(a.getBoundingBox() == b);
+  BOOST_REQUIRE(a.getBoundingBox() == b);
 }
 
 BOOST_AUTO_TEST_CASE(Triangle_getBoundingSphere) {
@@ -38,7 +37,7 @@ BOOST_AUTO_TEST_CASE(Triangle_getBoundingSphere) {
 	a.points.push_back(vec3(3,4,4));
 	Sphere b(vec3(3,2.5,2.5),vec3(2,1.5,1.5).length());
 
-	BOOST_CHECK(a.getBoundingSphere() == b);
+	BOOST_REQUIRE(a.getBoundingSphere() == b);
 }
 
 BOOST_AUTO_TEST_CASE(Box_contains_point) {

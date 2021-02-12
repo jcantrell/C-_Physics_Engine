@@ -3,7 +3,7 @@
 /*
  * @brief Checks two floats to see if they are almost equal
  */
-bool feq(float a, float b, float e = std::numeric_limits<float>::epsilon()) {
+bool feq(float a, float b, float e) {
 	return fabs(a-b) <= e;
 }
 
@@ -63,6 +63,10 @@ vec3& vec3::operator +=( const vec3& rhs ) {
 
 vec3 vec3::operator *(float rhs) const {
 	return entrywise_product(vec3(rhs,rhs,rhs));
+}
+
+vec3 vec3::operator /(float rhs) const {
+  return vec3(x/rhs, y/rhs, z/rhs);
 }
 
 bool vec3::operator ==( const vec3& rhs) const {
